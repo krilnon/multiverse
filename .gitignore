@@ -1,0 +1,8 @@
+node_modules/
+
+config.js
+
+*.jar
+*.swf
+
+.DS_Store

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+		<title>Multiverse</title>
+		<link rel="stylesheet" type="text/css" href="start.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script src="start.js"></script>
+	</head>
+	<body>
+		<img src="images/multiverse_logo_new.png" alt="Multiverse logo" width="400" />
+		<form id="vm-info" name="form">
+			<h3>Starting State</h3>
+			<div>
+				<input type="text" name="vmfile" id="vm-file" value="{{config.default_vm}}" />
+				<br />
+				<!--<label for="branches">Branches per step: </label><input type="number" id="branchCount" name="branchCount" value="2" />
+				<br />-->
+				<label for="branches">Votes per step: </label><input type="number" id="voteCount" name="voteCount" value="2" />
+				<br />
+				<label for="parallel">Parallel: </label><input type="checkbox" id="parallel" name="parallel" />
+				<br />
+				<input type="submit" id="start-btn" value="Start" />
+			</div>
+			<h3>Instructions</h3>
+			<div>
+				<input type="button" id="plus" value="+" />
+				<input type="button" id="minus" value="-" />
+				<ol id="instructions"></ol>
+				
+			</div>
+		</form>
+		<div id="status-area" class="hidden">
+			<h3>Status</h3>
+			<p id="status">
+				<span id="progress-text"></span>
+				<progress id="progress"></progress>
+			</p>
+		</div>
+	</body>
+</html>

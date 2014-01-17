@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+		<title>Control Task</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="turkit-lib.js"></script>
+		<script type="text/javascript" src="control-task.js"></script>
+		<script type="text/javascript">
+			if('{{assignmentId}}' != 'ASSIGNMENT_ID_NOT_AVAILABLE'){
+				
+				 swfobject.embedSWF('Flashlight-m2.swf', 'vnc', '1024', '768', '10.0.0', 
+					null, {
+						hideControls: true,
+						autoConnect: true,
+						viewOnly: false,
+						host: '{{config.vm_host}}',
+						port: {{config.vm_port}},
+						securityPort: 843,
+						useSecurity: false,
+						password: 'vm1',
+						jpegCompression: 7
+					})
+				
+			} else { // just show an example image
+				$(function(){
+					$('#vnc').append('<img src="http://SCREENSHOT_SERVER/screenshots/v1334333156487-0_0_0-1334334154.jpg" />')
+				})
+			}
+			
+			window.vid = '{{id}}'
+			window.branch = '{{branch}}'
+			window.anno = '{{anno}}'
+			window.prev_anno = '{{prev_anno}}'
+			
+			setInterval(vScreen, 60000)
+		</script>
+	</head>
+	<body>
+		<h1>Task: {{instr}}</h1>
+		<p style="width: 1024px;">
+			You are controlling the computer in the window below.  You can use your mouse and the 
+			keyboard to click, type, drag-and-drop, etc.  When you are finished, press the submit 
+			button at the bottom of the page.
+		</p>
+		{{{anno_html}}}
+		<p>
+			Note: If you have connection errors, please refresh the page and try again.  Your progress 
+			will be preserved. 
+		</p>
+		{{{button_html}}}
+		<div id="prev-anno"></div>
+		<br />
+		<div id="vnc"></div>
+		
+		<form id="form" name="form">
+          <input type="hidden" id="assignmentId" name="assignmentId" value="hci"></input>
+          <input type="hidden" id="workerId" name="workerId" value="hci"></input>
+          <input type="hidden" id="hitId" name="hitId" value="hci"></input>
+          <input type="submit" id="submitBtn" style="width: 175px; height: 75px; margin-left: 450px;" value="Task Complete.  Submit."></input>
+        </form>
+	</body>
+</html>

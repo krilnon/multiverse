@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+		<title>multi-view</title>
+		<style>
+			.side {
+				position: relative;
+				top: -400px;
+				width: 150px;
+				left: 1024px;
+				height: 100px;
+			}
+		</style>
+		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="turkit-lib.js"></script>
+		<script type="text/javascript" src="merge-task.js"></script>
+		<script type="text/javascript">
+			window.branches = ('{{branches}}').split(',')
+			window.vid = '{{id}}'
+			var len = window.branches.length;
+			
+			setInterval(function(){
+				vScreen(0)
+			}, 60000)
+			
+			if('{{assignmentId}}' != 'ASSIGNMENT_ID_NOT_AVAILABLE'){
+				for(var i = 0; i < len; i++){
+					swfobject.embedSWF('Flashlight-m.swf', 'vnc-' + i, '1024', '768', '10.0.0', 
+						null, {
+							hideControls: true,
+							autoConnect: true,
+							viewOnly: false,
+							host: '{{config.vm_host}}',
+							port: {{config.vm_port}} + i,
+							securityPort: 843,
+							useSecurity: false,
+							password: 'vm1',
+							jpegCompression: 7,
+							colorDepth: 16
+						}
+					)
+					
+					var f = function(){
+						var i = arguments.callee.i
+						if(i > 0) $('#p' + i).append('<div class="side"><input type="button" onclick="vCopy(' + i + ')" value="Copy" /></div>')
+						if(i == 0) $('#p' + i).append('<div class="side"><input type="button" onclick="vPaste(' + i + ')" value="Paste" /><br /><input type="button" onclick="vUndo(' + i + ')" value="Undo" /></div>')
+					}
+					f.i = i
+					$(f)
+				}
+			} else {
+				$(function(){
+					$('#vnc').append('<img src="http://SCREENSHOT_SERVER/screenshots/v1334333156487-0_0_0-1334334154.jpg" />')
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Task: {{instr}}</h1>
+		<p style="width: 1024px;">
+			You are in control of several windows; scroll down to see the rest.  The goal is to 
+			copy from the lower windows and paste into the very top window.  To copy, first use the 
+			mouse to click and select the item you want to copy.  The copy button will 
+			copy whatever is currently selected in the window.  Then, click in the part of the top 
+			screen where you want to paste the copied item. Use the paste button to paste.  When 
+			you are finished, scroll to the bottom and click the Submit button.
+		</p>
+		<p>
+			Note: Use the "Copy", "Paste", and "Undo" buttons that are on the right side of the page next to 
+			each of the windows; do not use keyboard shortcuts for these actions.
+		</p>
+		<div id="p0"><div id="vnc-0"></div></div>
+		<div id="p1"><div id="vnc-1"></div></div>
+		<div id="p2"><div id="vnc-2"></div></div>
+		<div id="p3"><div id="vnc-3"></div></div>
+		<div id="p4"><div id="vnc-4"></div></div>
+		<div id="p5"><div id="vnc-5"></div></div>
+		<div id="p6"><div id="vnc-6"></div></div>
+		<div id="p7"><div id="vnc-7"></div></div>
+		<div id="p8"><div id="vnc-8"></div></div>
+		<form id="form" name="form">
+          <input type="hidden" id="assignmentId" name="assignmentId" value="hci"></input>
+          <input type="hidden" id="workerId" name="workerId" value="hci"></input>
+          <input type="hidden" id="hitId" name="hitId" value="hci"></input>
+          <input type="submit" id="submitBtn" style="width: 175px; height: 75px; margin-left: 450px;" value="Task Complete.  Submit."></input>
+        </form>
+	</body>
+</html>

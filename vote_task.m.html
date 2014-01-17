@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<title>Voting</title>
+		<style>
+			html,body,input {
+			  font-size: 1.1em;
+			  font-family: arial;
+			}
+			td {
+			 text-align: center;
+			 width: 281px;
+			 padding: 3px;
+			}
+			table {
+			  margin-bottom: 2em;
+			}
+			ol {
+			 width: 30em;
+			 margin: auto;
+			 text-align: left;
+			}
+			
+			img {
+				width: 512px;
+				height: 384px;
+			}
+
+			td:nth-child(odd) {
+			  background: #CCC;
+			}
+			td:nth-child(even) {
+			  background: #EEE;
+			}
+		</style>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="turkit-lib.js"></script>
+		<script type="text/javascript" src="vote.js"></script>
+	</head>
+	<body>
+		<center>
+			<h1>Which task was done the best?</h1>
+			<p>
+				A prior worker was asked to do the following:
+				<br>
+				<h2>"{{instr}}"</h2>
+			</p>
+			<ol>
+				<li>Examine the screenshots below.</li>
+				<li>Choose the one in which the task above has been done the best.</li>
+				<li>Mark your selection by clicking on image or the button below it.</li>
+			</ol>
+			<p>
+				Your vote will be examined manually before the HIT is accepted, so please try your best.
+			</p>
+			<form id="form" name="form">
+				<table>
+					<tr>
+						{{{vote_html}}}
+					</tr>
+				</table>
+				<input type="hidden" id="assignmentId" name="assignmentId" value="hci"></input>
+				<input type="hidden" id="workerId" name="workerId" value="hci"></input>
+				<input type="hidden" id="hitId" name="hitId" value="hci"></input>
+				<input type="submit" id="submit-btn" value="Task Complete. Submit"></input>
+			</form>
+		</center>
+	</body>
+</html>
